@@ -106,12 +106,11 @@ These allow a designer to adjust the visual appearance without touching the code
 
 Project Structure
 
-SkillpathCourses/
-├── SkillpathCourses.tsx   # Main Framer Code Component
-├── CourseCard.tsx         # Individual course card
-├── api.ts                 # API requests and country caching
-├── types.ts               # TypeScript types
-└── styles.ts              # Component CSS
+- main.tsx               # Main Framer Code Component
+- Course.tsx             # Individual course card
+- api.ts                 # API requests and country caching
+- types.ts               # TypeScript types
+- styles.ts              # Component CSS
 
 What I'd Fix With Two More Days
 
