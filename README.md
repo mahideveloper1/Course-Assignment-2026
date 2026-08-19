@@ -112,10 +112,6 @@ Project Structure
 - types.ts               # TypeScript types
 - styles.ts              # Component CSS
 
-What I'd Fix With Two More Days
 
-If I had two more days, I’d spend more time polishing the UI, especially the course cards and responsive behavior, and testing the API failure cases.
-
-The main thing I got stuck on was when only the country API fails. Since the course API gives both INR and USD prices, I didn’t want to randomly choose one. I solved this by caching the last successful country (IN or US) and using it as a fallback when the country API fails. If there’s no cached country, I show “Price unavailable”.
 
 I’m happy with the functionality and structure, but I think the visual polish could still be improved with more time.
