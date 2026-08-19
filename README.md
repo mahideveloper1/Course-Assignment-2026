@@ -1,7 +1,122 @@
-# What you'd fix with two more days. Where you got stuck. What you're not happy with ?
+ ## Skillpath – Framer Assignment
 
-## If I had two more days, I’d spend more time polishing the UI and making the course cards feel more refined across different screen sizes. I’d also do more testing around the API randomly failing, especially the different loading and error cases.
+A responsive landing page for a fictional learning platform called Skillpath, built in Framer.
 
-## The main thing I got stuck on was what to do when only the country API fails. The course API still gives both INR and USD prices, but the country API is what tells us which one to show. I didn’t want to just default to INR or USD and potentially show the wrong price. So I added a small caching fallback whenever the country API works, I save the last successful country (IN or US). If the country API fails later, I use that cached country to decide which price to show. If there’s no cached value yet, I show "Price unavailable".
+The main focus of the assignment is the dynamic Courses section, which is implemented as a React Code Component and fetches live data from the provided APIs.
 
-## I’m mostly happy with the functionality and the way the component is structured now. The main thing I’m not completely happy with is that the visual design could still use another round of refinement. I’d also spend more time testing edge cases and making the component feel more polished rather than just functionally complete.
+Assignment Requirements
+
+The landing page contains three main sections:
+
+Hero – headline, supporting text, and CTA button.
+
+Courses – dynamic course grid powered by the API.
+
+Footer – three links and a copyright line.
+
+Courses Component
+
+The courses section uses two GET endpoints from:
+
+https://syncsphere-hiv6.onrender.com
+
+Course Data
+
+GET /assignment/course-data
+
+Returns an array of 5–10 courses. The number of courses can change between requests, so the UI generates the cards dynamically instead of hardcoding them.
+
+Each course displays:
+
+Course name
+
+Description, limited to two lines
+
+Main category
+
+Price
+
+Refundable status when available
+
+Country Code
+
+GET /assignment/country-code
+
+Returns either:
+
+{ "country_code": "IN" }
+
+or:
+
+{ "country_code": "US" }
+
+The country determines which course price is displayed:
+
+IN → pricePaise / 100 and formatted as INR
+
+US → priceUsdCents / 100 and formatted as USD
+
+API Failure Handling
+
+The APIs intentionally fail sometimes, so the component handles different states gracefully.
+
+Loading
+
+While course data is being fetched, skeleton course cards are shown instead of leaving the section blank.
+
+Error
+
+If the Course API fails, a friendly error message and Try again button are displayed. Clicking the button triggers the API requests again.
+
+Zero Results
+
+If the Course API succeeds but returns an empty array, the component displays:
+
+No courses available right now.
+
+Country API Failure
+
+The Course API and Country API are handled independently.
+
+If the Course API works but the Country API fails, the courses are still displayed. To avoid guessing whether INR or USD should be used, the component caches the last successfully received country code (IN or US) in localStorage and uses that value as a fallback.
+
+If there is no cached country yet, the price is shown as Price unavailable.
+
+Responsive Design
+
+The course grid adapts to different screen sizes:
+
+Desktop: 3 columns
+
+Tablet: 2 columns
+
+Mobile: 1 column
+
+The grid supports any number of courses returned by the API.
+
+Framer Property Controls
+
+The React Code Component exposes two controls in the Framer properties panel:
+
+Card Radius – controls the roundness of course cards.
+
+Card Gap – controls the spacing between cards.
+
+These allow a designer to adjust the visual appearance without touching the code.
+
+Project Structure
+
+SkillpathCourses/
+├── SkillpathCourses.tsx   # Main Framer Code Component
+├── CourseCard.tsx         # Individual course card
+├── api.ts                 # API requests and country caching
+├── types.ts               # TypeScript types
+└── styles.ts              # Component CSS
+
+What I'd Fix With Two More Days
+
+If I had two more days, I’d spend more time polishing the UI, especially the course cards and responsive behavior, and testing the API failure cases.
+
+The main thing I got stuck on was when only the country API fails. Since the course API gives both INR and USD prices, I didn’t want to randomly choose one. I solved this by caching the last successful country (IN or US) and using it as a fallback when the country API fails. If there’s no cached country, I show “Price unavailable”.
+
+I’m happy with the functionality and structure, but I think the visual polish could still be improved with more time.
