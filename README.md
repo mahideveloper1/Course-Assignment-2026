@@ -94,7 +94,7 @@ Mobile: 1 column
 
 The grid supports any number of courses returned by the API.
 
-Framer Property Controls
+### Framer Property Controls
 
 The React Code Component exposes two controls in the Framer properties panel:
 
